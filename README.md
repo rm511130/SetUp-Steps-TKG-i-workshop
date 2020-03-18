@@ -56,7 +56,41 @@ ssh -i ~/Downloads/fuse.pem ubuntu@user1.pks4u.com
 
 - You can cut&paste from the AWS console into an Excel Spreadsheet and the create the gcloud commands for the creation of the DNS entries.
 
+- What are the `user#.pks4u.com` DNS entries already in place?
 
+```
+gcloud dns record-sets list --zone pks4u-zone --filter=Type=A | grep user..pks4u.com
+```
+```
+user1.pks4u.com.               A     5    54.160.63.114
+user2.pks4u.com.               A     5    54.237.216.69
+user3.pks4u.com.               A     5    3.89.192.76
+```
+
+- Ideally, you should go imto `gcloud` and delete all these entries... it's just a few clicks. Otherwise the addition of the new IP addresses will fail.
+
+- Here are the commands you will have to tweak to get the new IP addresses in place:
+
+```
+gcloud dns record-sets transaction start --zone=pks4u-zone
+gcloud dns record-sets transaction add 35.36.111.222 --name=user3.pks4u.com --zone=pks4u-zone --ttl=300 --type=A
+gcloud dns record-sets transaction add 35.36.111.223 --name=user4.pks4u.com --zone=pks4u-zone --ttl=300 --type=A
+gcloud dns record-sets transaction add 35.36.111.224 --name=user5.pks4u.com --zone=pks4u-zone --ttl=300 --type=A
+gcloud dns record-sets transaction add 35.36.111.225 --name=user6.pks4u.com --zone=pks4u-zone --ttl=300 --type=A
+gcloud dns record-sets transaction execute --zone=pks4u-zone
+```
+Output:
+```
+Transaction started [transaction.yaml].
+Record addition appended to transaction at [transaction.yaml].
+Record addition appended to transaction at [transaction.yaml].
+Record addition appended to transaction at [transaction.yaml].
+Record addition appended to transaction at [transaction.yaml].
+Executed transaction [transaction.yaml] for managed-zone [pks4u-zone].
+Created [https://dns.googleapis.com/dns/v1/projects/fe-rmeira/managedZones/pks4u-zone/changes/169].
+ID   START_TIME                STATUS
+169  2020-03-18T21:44:10.046Z  pending
+```
 
 ## Step 4 - 
 
