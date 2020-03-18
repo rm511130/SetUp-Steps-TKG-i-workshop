@@ -92,7 +92,113 @@ ID   START_TIME                STATUS
 169  2020-03-18T21:44:10.046Z  pending
 ```
 
-## Step 4 - 
+- Check on the GCP DNS page.
+- Check whether you can log in:
+
+```
+ssh -i ~/Downloads/fuse.pem ubuntu@user3.pks4u.com
+```
+
+## Step 5 - Check whether all the PKS UAA Users are in place
+
+```
+ssh ubuntu@pcf.pks4u.com
+source 0.sh; source 1.sh
+```
+- Check whether the output shows all the `devops[2..22]` users and the `user[2..22]` users.
+- Check whether the output also shows `pks_admin` and `pks_manager`
+
+- If they are not present, the continue as follows:
+
+```
+for i in {2..22}; do uaac user add devops$i --emails devops$i@vmware.com -p password ;done
+for i in {2..22}; do uaac member add pks.clusters.manage devops$i   ; done
+for i in {2..22}; do uaac user add user$i --emails user$i@vmware.com -p password ;done
+```
+
+## Step 6 - Create K8s Clusters for Everyone
+
+- We need to `pks create-cluster user[2..22]-cluster.pks4u.com --plan small ...` 
+
+- To do this, we're going to use some scripts found at: 
+
+```
+cd /work/manage-pks/gcp
+```
+- First, let's check if the clusters `user[2..22]-cluster` already exist:
+
+```
+pks login -a https://api.pks.pks4u.com:9021 -u pks_admin -p password -k
+pks clusters
+```
+- Expected Output
+```
+PKS Version    Name            k8s Version  Plan Name  UUID                                  Status     Action
+1.6.1-build.6  shared-cluster  1.15.5       small      54ba6181-cfbe-452b-87fa-f690a39fc8b7  succeeded  CREATE
+1.6.1-build.6  user2-cluster   1.15.5       small      77db4a28-bd8e-4a1d-9541-bcd46f5da9e8  succeeded  CREATE
+1.6.1-build.6  user3-cluster   1.15.5       small      f9dbce9f-c694-4730-b2bb-a9447c1d25ba  succeeded  CREATE
+...
+1.6.1-build.6  user22-cluster  1.15.5       small      f9dbce9f-c694-4730-b2bb-a9447c1d25ba  succeeded  CREATE
+```
+
+- If you don't see the output shown above then use `vi` to take a look at the following scripts before running them:
+
+```
+cd /work/manage-pks/gcp
+vi 01-playing-with-provisioning.sh
+```
+- And check if the brackets have the right numbers: `for i in {2..22}`
+- If they do, then go ahead and execute: `./01-playing-with-provisioning.sh`
+- Then wait for completion: `watch pks clusters`
+
+- Once you have `Status: succeeded` for every-cluster proceed to the step below:
+
+```
+cd /work/manage-pks/gcp
+vi 02-playing-with-accessing.sh
+```
+- And check if the brackets have the right numbers: `for i in {2..22}`
+- If they do, then go ahead and execute: `./02-playing-with-accessing.sh`
+- Then check on `gcloud` to see if the DNS Entries and Load Balancers are in place for each `user[2.22]-cluster`:
+
+```
+gcloud dns record-sets list --zone pks4u-zone --filter=Type=A | grep user.-cluster-k8s.pks4u.com
+```
+
+- All going well, you should be able to log into each cluster as `pks_admin` and each `userID` should be able to see only their specidic cluster `userID-cluster`:
+
+```
+pks login -a https://api.pks.pks4u.com:9021 -u pks_admin -p password -k; pks clusters
+for i in {2..22}; do pks login -a https://api.pks.pks4u.com:9021 -u devops$i -p password -k; pks cluster user$i-cluster; done
+```
+
+## Step 7 - Create K8s Shared-Clusters with Roles and Rolebindings
+
+- The `share-cluster` needs to exist with access allowed for `userID` to `namespaceID` and nothing else. Let's check:
+
+```
+pks login -a https://api.pks.pks4u.com:9021 -u pks_admin -p password -k
+pks cluster shared-cluster
+pks get-credentials shared-cluster
+kubectl get namespaces
+kubectl get rolebindings --all-namespaces
+kubectl get roles --all-namespaces
+```
+
+- If the output is not a long list of roles and rolebindings associated to a long list of namespaces... then you have to create them:
+
+```
+cd /work/manage-pks/gcp
+./manage-cluster-provision-v2 shared-cluster small pks4u-zone
+```
+
+- It will run for 10 minutes. You can then continue with:
+
+```
+
+
+
+
 
 
 
