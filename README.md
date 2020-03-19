@@ -195,6 +195,70 @@ cd /work/manage-pks/gcp
 - It will run for 10 minutes. You can then continue with:
 
 ```
+cd /work/pks4lbrands
+./create-vmware-role-yml.sh
+./create-vmware-rolebinding-yml.sh
+```
+- You should see a long list of roles and rolebindings as the output.
+
+# Step 8 - The Bonus Lab
+
+- The Bonus Lab is executed on PAS running on Azure. To check whether it's ready, execute the following commands:
+
+```
+for i in {2..22}; do cf login -a api.sys.13.91.194.182.cf.pcfazure.com -p password -u user$i
+```
+
+# Step 9 - Tanzu Mission Control
+
+- During Lab-9, the users will need to execute something similar to this command on their respective `userID-cluster`:
+```
+kubectl apply -f 'https://tanzupaorg.tmc.cloud.vmware.com/installer?84f9abcdef4c98' 
+```
+
+- The actual command comes from TMC. So you need to log into TMC.
+
+```
+open https://console.cloud.vmware.com
+# log in as rmeira@pivotal.io  with the same password you use for PivNet!
+# select the TMC tile
+# clustergroup:  lb-workshop
+# attach-cluster:  userID
+# Register and grab the command: kubectl apply -f 'https://tanzupaorg.tmc.cloud.vmware.com/installer?cdaf669189f24952'
+# Verify connection later (it will last 48hrs)
+```
+
+- Ideally you should get them all done one day in advance.
+
+```
+user2:   kubectl apply -f 'https://tanzupaorg.tmc.cloud.vmware.com/installer?9c40fb3e92522445'
+user3:   kubectl apply -f 'https://tanzupaorg.tmc.cloud.vmware.com/installer?b81828fa990791dd'
+user4:   kubectl apply -f 'https://tanzupaorg.tmc.cloud.vmware.com/installer?44ad766e31ff61d6'
+user5:   kubectl apply -f 'https://tanzupaorg.tmc.cloud.vmware.com/installer?ebe44a84d681d946'
+user6:   kubectl apply -f 'https://tanzupaorg.tmc.cloud.vmware.com/installer?daaac8b13514f5b8'
+user7:   kubectl apply -f 'https://tanzupaorg.tmc.cloud.vmware.com/installer?a612682da1f2c66f'
+user8:   kubectl apply -f 'https://tanzupaorg.tmc.cloud.vmware.com/installer?6fbacf4342bba4e9'
+user9:   kubectl apply -f 'https://tanzupaorg.tmc.cloud.vmware.com/installer?9fda5e3c13cd39cf'
+user10:  kubectl apply -f 'https://tanzupaorg.tmc.cloud.vmware.com/installer?25ebdafbbaa63616'
+user11:  kubectl apply -f 'https://tanzupaorg.tmc.cloud.vmware.com/installer?ae0ee4d1c59cbfce'
+user12:  
+user13:
+user14:
+user15:
+user16:
+user17:
+user18:
+user19:
+user20:
+```
+
+
+
+
+
+
+
+
 
 
 
