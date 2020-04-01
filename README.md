@@ -206,7 +206,20 @@ cd /work/pks4lbrands
 - The Bonus Lab is executed on PAS running on Azure. To check whether it's ready, execute the following commands:
 
 ```
-for i in {2..22}; do cf login -a api.sys.13.91.194.182.cf.pcfazure.com -p password -u user$i
+for i in {2..22}; do cf login -a api.sys.13.86.190.177.cf.pcfazure.com -p password -u user$i
+```
+
+- If the users, orgs and spaces are not in place:
+
+```
+cf api api.sys.13.86.190.177.cf.pcfazure.com --skip-ssl-validation
+cf login
+for i in {1..25}; do cf create-org org$i; done
+for i in {1..25}; do cf create-user user$i password; done
+for i in {1..25}; do cf create-space workshop -o org$i; done
+for i in {1..25}; do cf set-org-role user$i org$i OrgManager; done
+for i in {1..25}; do cf set-space-role user$i org$i workshop SpaceManager; done
+for i in {1..25}; do cf set-space-role user$i org$i workshop SpaceDeveloper; done
 ```
 
 # Step 9 - Tanzu Mission Control
