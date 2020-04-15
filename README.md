@@ -1,6 +1,6 @@
 # Set-Up Steps for Tanzu-Workshop-TKG-i
 
-The [TKG-i Workshop](https://github.com/rm511130/Tanzu-Workshop-TKG-i) needs quite a lot of set-up for it to work. These instructions should help you with all the necessary steps.
+The [TKG-i Workshop](https://github.com/rm511130/Tanzu-Workshop-TKG-i#vmware-tkg-i-workshop) needs quite a lot of set-up for it to work. These instructions should help you with all the necessary steps.
 
 ## Step 0 - Clone the Workshop repo to customize it
 
