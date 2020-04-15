@@ -1,3 +1,7 @@
+# Environment for TKG-i Workshop
+
+![](./BigDiagram.png)
+
 # Set-Up Steps for Tanzu-Workshop-TKG-i
 
 The [TKG-i Workshop](https://github.com/rm511130/Tanzu-Workshop-TKG-i#vmware-tkg-i-workshop) needs quite a lot of set-up for it to work. These instructions should help you with all the necessary steps.
