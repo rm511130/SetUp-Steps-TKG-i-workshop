@@ -1,10 +1,11 @@
-# Set-Up Steps for Tanzu-Workshop-PKS
+# Set-Up Steps for Tanzu-Workshop-TKG-i
 
-The [Tanzu Workshop PKS](https://github.com/rm511130/Tanzu-Workshop-PKS) needs quite a lot of set-up for it to work. These instructions should help you with all the necessary steps.
+The [TKG-i Workshop](https://github.com/rm511130/Tanzu-Workshop-TKG-i) needs quite a lot of set-up for it to work. These instructions should help you with all the necessary steps.
 
 ## Step 0 - Clone the Workshop repo to customize it
 
 - correct the date/time in the agenda
+- add an easy tinyurl.com link at the top of the page and point it at your github URL.
 
 ## Step 1 - Manage-PKS Repo
 
