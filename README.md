@@ -2,6 +2,10 @@
 
 The [Tanzu Workshop PKS](https://github.com/rm511130/Tanzu-Workshop-PKS) needs quite a lot of set-up for it to work. These instructions should help you with all the necessary steps.
 
+## Step 0 - Clone the Workshop repo to customize it
+
+- correct the date/time in the agenda
+
 ## Step 1 - Manage-PKS Repo
 
 - Using your Mac, check if you have the 
