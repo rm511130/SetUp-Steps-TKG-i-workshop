@@ -7,6 +7,21 @@ The [TKG-i Workshop](https://github.com/rm511130/Tanzu-Workshop-TKG-i) needs qui
 - correct the date/time in the agenda
 - add an easy tinyurl.com link at the top of the page and point it at your github URL.
 
+## Step 0.5 - Create VMs using gcloud
+
+```
+gcloud compute instances create user3-vm --hostname=user3.pks4u.com --image-family=ubuntu-1804-lts --image-project=ubuntu-os-cloud
+```
+```
+Created [https://www.googleapis.com/compute/v1/projects/fe-rmeira/zones/us-east1-b/instances/user3-vm].
+NAME      ZONE        MACHINE_TYPE   PREEMPTIBLE  INTERNAL_IP  EXTERNAL_IP   STATUS
+user3-vm  us-east1-b  n1-standard-1               10.142.0.7   34.74.89.226  RUNNING
+```
+
+Updates are available for some Cloud SDK components.  To install them,
+please run:
+  $ gcloud components update
+
 ## Step 1 - Manage-PKS Repo
 
 - Using your Mac, check if you have the 
