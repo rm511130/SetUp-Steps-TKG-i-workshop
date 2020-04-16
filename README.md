@@ -84,7 +84,7 @@ https://console.aws.amazon.com/
 ssh -i ~/Downloads/fuse.pem ubuntu@user1.pks4u.com
 ```
 
-- You will need to create your own `pem` key and then convert it to the `ppk` format so that both Mac and Windows PC PuTTY users may have easy access to their workshop VMs.
+- You will need to create your own `pem` key and then [convert](https://tecadmin.net/convert-pem-to-ppk-via-putty/) it to the `ppk` format so that both Mac and Windows PC PuTTY users may have easy access to their workshop VMs.
 
 - Given that GCP nameservers are used to manage the `pks4u.com` domain, the Public IP addresses of the Workshop Attendee's VMs must match the DNS entries on GCP: `user1.pks4u.com`, `user2.pks4u.com`, etc... to `user20`.
 
