@@ -1,3 +1,5 @@
+####[http://tiny.url/VMware01012020](https://tiny.url/VMware01012020)
+
 # Environment for TKG-i Workshop
 
 ![](./BigDiagram.png)
@@ -10,7 +12,7 @@
 
 - You can `fork` my `https://github.com/rm511130/Tanzu-Workshop-TKG-i` repo to add, change or delete content.
 - Once you have your own forked version of the repo, you can start by correcting the date/time in the agenda so it matches your workshop date/time and duration.
-- It's usually advisable to add an easy to remember [tinyurl.com](https://tiny.url) link at the top of the page and have it point at your forked workshop github URL. For example, I would use [http://tiny.url/VMware01012020](https://tiny.url/VMware01012020) 
+- It's usually advisable to add an easy to remember [tinyurl.com](https://tiny.url) link at the top of the page and have it point at your forked workshop github URL. For example, I would use [http://tiny.url/VMware01012020](https://tiny.url/VMware01012020) if the Workshop was aimed at VMware on 01-01-2020.
 
 ## Step 0.5 - Create VMs using gcloud
 
