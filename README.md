@@ -167,11 +167,11 @@ uaac token client get admin -s RiqYeabcdefskksjj
 uaac users | grep name
 uaac users | grep clients
 echo "You can now issue commands such as:"
-echo "        $ uaac user add pks_admin --emails pks_admin@pivotal.io -p password"
+echo "        $ uaac user add pks_admin --emails pks_admin@pivotal.io -p r4tyuKW_q"
 echo "        $ uaac member add pks.clusters.admin pks_admin"
-echo "        $ uaac user add pks_manager --emails pks_manager@pivotal.io -p password"
+echo "        $ uaac user add pks_manager --emails pks_manager@pivotal.io -p r4tyuKW_q"
 echo "        $ uaac member add pks.clusters.manage pks_manager"
-echo "        $ uaac user add generic_k8s_user --emails generic_k8s_user@pivotal.io -p password"
+echo "        $ uaac user add generic_k8s_user --emails generic_k8s_user@pivotal.io -p r4tyuKW_q"
 echo "          (in this example, generic_k8s_user can be referenced in rolebindings to give/take permissions)"
 ```
 
