@@ -7,35 +7,32 @@
 # Set-Up Steps for Tanzu-Workshop-TKG-i
 
 - The [TKG-i Workshop](https://github.com/rm511130/Tanzu-Workshop-TKG-i#vmware-tkg-i-workshop) needs quite a lot of set-up for it to work well. These instructions are in constant evolution, but they will help you with all the key set-up steps. It's recommended that you start by looking through the [Labs](https://github.com/rm511130/Tanzu-Workshop-TKG-i#vmware-tkg-i-workshop) to get better acquainted with what is expected of the workshop attendees.
+- When this workshop was first created, PKS had not yet been rebranded to TKG-i, so this page is being revised _as we speak_ and as changes occur. For example, if the PKS CLI changes to TKG-i CLI, you will see the change reflected here as well.
 
-## Step 0 - Customize the TKG-i Workshop
+## Step 0 - Customizing the TKG-i Workshop & Expectations
 
-- You can `fork` my `https://github.com/rm511130/Tanzu-Workshop-TKG-i` repo to add, change or delete content.
-- Once you have your own forked version of the repo, you can start by correcting the date/time in the agenda so it matches your workshop date/time and duration.
-- It's usually advisable to add an easy to remember [tinyurl.com](https://tinyurl.com) link at the top of the page and have it point at your forked workshop github URL. For example, I would use [http://tinyurl.com/VMware01012020](https://tinyurl.com/VMware01012020) if the Workshop was aimed at VMware on 01-01-2020.
-
-## Step 0.5 - Create VMs using gcloud
-
-```
-gcloud compute instances create user3-vm --hostname=user3.pks4u.com --image-family=ubuntu-1804-lts --image-project=ubuntu-os-cloud
-```
-```
-Created [https://www.googleapis.com/compute/v1/projects/fe-rmeira/zones/us-east1-b/instances/user3-vm].
-NAME      ZONE        MACHINE_TYPE   PREEMPTIBLE  INTERNAL_IP  EXTERNAL_IP   STATUS
-user3-vm  us-east1-b  n1-standard-1               10.142.0.7   34.74.89.226  RUNNING
-```
-
-Updates are available for some Cloud SDK components.  To install them,
-please run:
-  $ gcloud components update
+- `Fork` my `https://github.com/rm511130/Tanzu-Workshop-TKG-i` repo to add, change or delete content. Do not use my repo as-is because it contains, for example, a link to a Google Spreadsheet that needs to be unique per Workshop.
+- Once you have your own forked version of the repo, you can start by correcting the date & time in the agenda so it matches your workshop date, time and duration.
+- It's usually advisable to add an easy to remember [tinyurl.com](https://tinyurl.com) link at the top of the page. Place a link that points at your forked workshop github URL. For example, I would use [http://tinyurl.com/VMware01012020](https://tinyurl.com/VMware01012020) if the Workshop was aimed at VMware on 01-01-2020.
+- The workshop was developed with the help of a MacBook. From the perspective of a workshop attendee, the workshop has been tested with Windows PCs, but from the perpective of who is running the and setting-up the workshop environments, a MacBook was used and not a Windows PC.
+- The workshop, as it stands, makes use of a public domain `pks4u.com`. You will need to use your own public domain to be able to effectively run this workshop. I used [GoDaddy](https://www.godaddy.com/) to find, puchase and manage the `pks4u.com` domain.
 
 ## Step 1 - Manage-PKS Repo
 
-- Using your Mac, check if you have the 
+- Using your MacBook, check if you have the following directory:
 ```
 cd /work/manage-pks/gcp
 ```
-directory derived from `https://github.com/rm511130/manage-pks` containing the following files:
+
+- If you don't, you should execute the following commands:
+
+```
+mkdir -p /work; cd /work
+git clone https://github.com/rm511130/manage-pks
+cd /work/manage-pks/gcp
+ls
+```
+- You should see the following files:
 
 ```
 01-playing-with-provisioning.sh
@@ -45,12 +42,6 @@ directory derived from `https://github.com/rm511130/manage-pks` containing the f
 manage-cluster	
 manage-cluster-provision-v2
 ```
-- If you don't have them, please: 
-```
-cd /work; rm -rf /work/manage-pks; 
-git clone https://github.com/rm511130/manage-pks
-cd /work/manage-pks/gcp
-```
 
 ## Step 2 - PKS Environment
 
@@ -59,51 +50,67 @@ cd /work/manage-pks/gcp
 - My PKS API is at: `api.pks.pks4u.com`               with credentials: `pks_admin / password`
 - Harbor is at:     `https://harbor.pks.pks4u.com`    with credentials: `admin / password`
 
-- To get into my GCP account I use:  `Mac $ gcloud auth login` and `Mac $ open https://console.cloud.google.com/`
+- To get into my GCP account I use:  
+
+```
+Mac $ gcloud auth login
+``` 
+and 
+
+```
+Mac $ open https://console.cloud.google.com/
+```
+
 - My Godaddy `pks4u.com` domain nameservice has been delegated to `GCP` for management.
 
-## Step 3 - AWS VMs
+## Step 3 - AWS VMs for workshop Attendees
 
-- I also have Ubuntu VMs (t2.medium) for each student running on AWS (N. Virginia) 
+- AWS Ubuntu VMs (t2.medium or t3a.medium) need to be up and running for each workshop attendee. 
+- I use the `AWS spot instances` to limit the overall cost associated with running the workshop.
+
 ```
 https://console.aws.amazon.com/
 ```
 
-- These VMs are using my AMI: `ami-095d7d3a049233cf5`. They come with multiple CLIs: `pks, cf, helm, gcloud, wget, docker, git, jq, python3, ...`
+- These VMs are based on a Public AWS AMI: `ami-03d58bcccfea6e008`. They come with multiple CLIs: `pks, cf, helm, gcloud, wget, docker, git, jq, python3, ...`
 
-- These VMs are accessible via the use of a [`pem`](https://github.com/rm511130/Tanzu-Workshop-PKS/blob/master/fuse.pem) or [`ppk`](https://github.com/rm511130/Tanzu-Workshop-PKS/blob/master/fuse.pem) key. For example:
+- These VMs are accessible via the use of a [`pem`](https://github.com/rm511130/Tanzu-Workshop-PKS/blob/master/fuse.pem) or [`ppk`](https://github.com/rm511130/Tanzu-Workshop-PKS/blob/master/fuse.pem) key. 
+- Workshop attendees are asked, as a set of pre-requisite steps, to make sure they can access the `user1.pks4u.com` VM a few days before the workshop is scheduled to take place.
 
 ```
 ssh -i ~/Downloads/fuse.pem ubuntu@user1.pks4u.com
 ```
 
-- Their Public IP addresses must match to the DNS entries on GCP: `user1.pks4u.com`, `user2.pks4u.com`, etc... to `user20`
+- You will need to create your own `pem` key and then convert it to the `ppk` format so that both Mac and Windows PC PuTTY users may have easy access to their workshop VMs.
 
-- If the VMs have been `stopped`, you'll need to start them and copy their public IP addresses oover to GCP DNS entries. The public IP addresses do change every time you start the VM.
+- Given that GCP nameservers are used to manage the `pks4u.com` domain, the Public IP addresses of the Workshop Attendee's VMs must match the DNS entries on GCP: `user1.pks4u.com`, `user2.pks4u.com`, etc... to `user20`.
 
-- You can cut&paste from the AWS console into an Excel Spreadsheet and the create the gcloud commands for the creation of the DNS entries.
+- If the AWS VMs have been `stopped`, you'll need to start them and copy their public IP addresses oover to GCP DNS entries. The public IP addresses do change every time you start the VM.
 
-- What are the `user#.pks4u.com` DNS entries already in place?
+- You can cut & paste from the AWS console into an Excel Spreadsheet and then create the gcloud commands for the creation of the DNS entries.
+
+- How do you determine what are the `user#.pks4u.com` DNS entries already in place?
 
 ```
 gcloud dns record-sets list --zone pks4u-zone --filter=Type=A | grep user..pks4u.com
 ```
+
+- The command shown above produces the following type of output:
+
 ```
 user1.pks4u.com.               A     5    54.160.63.114
 user2.pks4u.com.               A     5    54.237.216.69
 user3.pks4u.com.               A     5    3.89.192.76
 ```
 
-- Ideally, you should go imto `gcloud` and delete all these entries... it's just a few clicks. Otherwise the addition of the new IP addresses will fail.
-
 - Here are the commands you will have to tweak to get the new IP addresses in place:
 
 ```
 gcloud dns record-sets transaction start --zone=pks4u-zone
 gcloud dns record-sets transaction add 35.36.111.222 --name=user3.pks4u.com --zone=pks4u-zone --ttl=5 --type=A
-gcloud dns record-sets transaction add 35.36.111.223 --name=user4.pks4u.com --zone=pks4u-zone --ttl=5 --type=A
-gcloud dns record-sets transaction add 35.36.111.224 --name=user5.pks4u.com --zone=pks4u-zone --ttl=5 --type=A
-gcloud dns record-sets transaction add 35.36.111.225 --name=user6.pks4u.com --zone=pks4u-zone --ttl=5 --type=A
+gcloud dns record-sets transaction add 18.56.1.223 --name=user4.pks4u.com --zone=pks4u-zone --ttl=5 --type=A
+gcloud dns record-sets transaction add 15.36.11.224 --name=user5.pks4u.com --zone=pks4u-zone --ttl=5 --type=A
+gcloud dns record-sets transaction add 215.16.121.225 --name=user6.pks4u.com --zone=pks4u-zone --ttl=5 --type=A
 gcloud dns record-sets transaction execute --zone=pks4u-zone
 ```
 Output:
