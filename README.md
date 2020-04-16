@@ -17,7 +17,7 @@
 - The workshop was developed with the help of a MacBook. From the perspective of a workshop attendee, the workshop has been tested with Windows PCs, but from the perpective of who is running the and setting-up the workshop environments, a MacBook was used and not a Windows PC.
 - The workshop, as it stands, makes use of a public domain `pks4u.com`. You will need to use your own public domain to be able to effectively run this workshop. I used [GoDaddy](https://www.godaddy.com/) to find, puchase and manage the `pks4u.com` domain.
 
-## Step 1 - Manage-PKS Repo
+## Step 1 - Manage-PKS Repo a.k.a. How to easily create accessible K8s Clusters on PKS on GCP
 
 - Using your MacBook, check if you have the following directory:
 ```
@@ -45,7 +45,10 @@ manage-cluster-provision-v2
 
 ## Step 2 - PKS Environment
 
-- You need a target PKS environment. In my case I have PKS 1.6.1 on GCP using OpsMan 2.8.3 and I also have Harbor 1.10.1 installed.
+- You need a target PKS environment. 
+- In my case I have PKS 1.6.1 on GCP using OpsMan 2.8.3 and I also have Harbor 1.10.1 installed.
+- To get your own PKS installation on GCP you'll need a GCP account and these [notes/instructions](https://drive.google.com/open?id=1tnTE30pek6H0tAwPZqhvRzxM6ZAKg5EG)
+
 - My OpsMan URL is: `https://pcf.pks4u.com`           with credentials: `admin / password`
 - My PKS API is at: `api.pks.pks4u.com`               with credentials: `pks_admin / password`
 - Harbor is at:     `https://harbor.pks.pks4u.com`    with credentials: `admin / password`
