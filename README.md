@@ -1,4 +1,4 @@
-####[http://tiny.url/VMware01012020](https://tiny.url/VMware01012020)
+#### [http://tiny.url/VMware01012020](https://tiny.url/VMware01012020)
 
 # Environment for TKG-i Workshop
 
