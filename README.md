@@ -266,20 +266,22 @@ cd /work/manage-pks/gcp
 
 ```
 cd /work/pks4lbrands
-[./create-vmware-role-yml.sh](https://github.com/rm511130/SetUp-Steps-TKG-i-workshop/blob/master/create-vmware-role-yml.sh)
-[./create-vmware-rolebinding-yml.sh](https://github.com/rm511130/SetUp-Steps-TKG-i-workshop/blob/master/create-vmware-rolebinding-yml.sh)
+./create-vmware-role-yml.sh
+./create-vmware-rolebinding-yml.sh
 ```
 - You should see a long list of roles and rolebindings as the output.
 
 # Step 8 - The Bonus Lab
 
-- The Bonus Lab is executed on PAS running on Azure. To check whether it's ready, execute the following commands:
+- The Workshop Bonus Lab is executed on PAS running on Azure. Don't worry if you don't have PAS running on Azure, it's actually quite easy to spin up PAS on Azure using the [Azure Marketplace](https://portal.azure.com/#blade/Microsoft_Azure_Marketplace). Search for _Pivotal Platform on Microsoft Azure_ and follow the wizard based process. You will end-up with PAS on Azure using a Domain that will look something like this: `13.86.190.177.cf.pcfazure.com`
+
+- To check whether it's ready, execute the following commands:
 
 ```
 for i in {2..25}; do cf login -a api.sys.13.86.190.177.cf.pcfazure.com --skip-ssl-validation -p password -u user$i; done
 ```
 
-- If the users, orgs and spaces are not in place:
+- If the users, orgs and spaces are not in place, execute the following commands:
 
 ```
 cf api api.sys.13.86.190.177.cf.pcfazure.com --skip-ssl-validation
@@ -304,7 +306,7 @@ kubectl apply -f 'https://tanzupaorg.tmc.cloud.vmware.com/installer?84f9abcdef4c
 
 ```
 open https://console.cloud.vmware.com
-# log in as rmeira@pivotal.io  with the same password you use for PivNet!
+# log in as rmeira@pivotal.io  (in my case with the same password you use for PivNet!)
 # select the TMC tile
 # clustergroup:  lb-workshop
 # attach-cluster:  userID
@@ -312,7 +314,7 @@ open https://console.cloud.vmware.com
 # Verify connection later (it will last 48hrs)
 ```
 
-- Ideally you should get them all done one day in advance.
+- Ideally you should get them all done one day in advance, and have them added to the Google Spreadsheet for ease of access
 
 ```
 user2:   kubectl apply -f 'https://tanzupaorg.tmc.cloud.vmware.com/installer?9c40fb3e92522445'
