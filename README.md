@@ -262,12 +262,12 @@ cd /work/manage-pks/gcp
 ./manage-cluster-provision-v2 shared-cluster small pks4u-zone
 ```
 
-- It will run for 10 minutes. After completion, you can then continue with the execution of the following two files:
+- It will run for 10 minutes. After completion, you can then continue with the execution of the following two files. Both files are included in this repo.
 
 ```
 cd /work/pks4lbrands
-./create-vmware-role-yml.sh
-./create-vmware-rolebinding-yml.sh
+[./create-vmware-role-yml.sh](https://github.com/rm511130/SetUp-Steps-TKG-i-workshop/blob/master/create-vmware-role-yml.sh)
+[./create-vmware-rolebinding-yml.sh](https://github.com/rm511130/SetUp-Steps-TKG-i-workshop/blob/master/create-vmware-rolebinding-yml.sh)
 ```
 - You should see a long list of roles and rolebindings as the output.
 
