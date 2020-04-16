@@ -49,9 +49,9 @@ manage-cluster-provision-v2
 - In my case I have PKS 1.6.1 on GCP using OpsMan 2.8.3 and I also have Harbor 1.10.1 installed.
 - To get your own PKS installation on GCP you'll need a GCP account and these [notes/instructions](https://drive.google.com/open?id=1tnTE30pek6H0tAwPZqhvRzxM6ZAKg5EG)
 
-- My OpsMan URL is: `https://pcf.pks4u.com`           with credentials: `admin / password`
-- My PKS API is at: `api.pks.pks4u.com`               with credentials: `pks_admin / password`
-- Harbor is at:     `https://harbor.pks.pks4u.com`    with credentials: `admin / password`
+- My OpsMan URL is: `https://pcf.pks4u.com`           with credentials: `admin / r4tyuKW_q`
+- My PKS API is at: `api.pks.pks4u.com`               with credentials: `pks_admin / r4tyuKW_q`
+- Harbor is at:     `https://harbor.pks.pks4u.com`    with credentials: `admin / r4tyuKW_q`
 
 - To get into my GCP account I use:  
 
@@ -129,8 +129,7 @@ ID   START_TIME                STATUS
 169  2020-03-18T21:44:10.046Z  pending
 ```
 
-- Check on the GCP DNS page.
-- Check whether you can log in:
+- Check, using a sample of the VMs, whether you can log in:
 
 ```
 ssh -i ~/Downloads/fuse.pem ubuntu@user3.pks4u.com
@@ -142,10 +141,44 @@ ssh -i ~/Downloads/fuse.pem ubuntu@user3.pks4u.com
 ssh ubuntu@pcf.pks4u.com
 source 0.sh; source 1.sh
 ```
+-  The `0.sh` and `1.sh` files are explained [here](https://drive.google.com/open?id=1tnTE30pek6H0tAwPZqhvRzxM6ZAKg5EG). They are simple scripts to gain access to the Bosh Director and PKS UAAC.
+
+```
+ubuntu@pks4u-ops-manager:~$ cat 0.sh
+
+# use source 0.sh to run this script
+bosh alias-env bosh-pks -e 10.0.0.10 --ca-cert /var/tempest/workspaces/default/root_ca_certificate
+bosh -e bosh-pks login << EOT
+director
+coEtmPabcdefhg6s8Vsf
+EOT
+shopt -s expand_aliases
+alias bosh='bosh -e bosh-pks'
+```
+
+```
+ubuntu@pks4u-ops-manager:~$ cat 1.sh
+
+# run this script using the command $ source 1.sh
+echo "Targeting PKS API VM UAA"
+uaac target https://api.pks.pks4u.com:8443 --ca-cert /var/tempest/workspaces/default/root_ca_certificate
+# using admin / secret from PCF > PKS Tile > Credentials > .properties.pks_uaa_management_admin_client
+uaac token client get admin -s RiqYeabcdefskksjj
+uaac users | grep name
+uaac users | grep clients
+echo "You can now issue commands such as:"
+echo "        $ uaac user add pks_admin --emails pks_admin@pivotal.io -p password"
+echo "        $ uaac member add pks.clusters.admin pks_admin"
+echo "        $ uaac user add pks_manager --emails pks_manager@pivotal.io -p password"
+echo "        $ uaac member add pks.clusters.manage pks_manager"
+echo "        $ uaac user add generic_k8s_user --emails generic_k8s_user@pivotal.io -p password"
+echo "          (in this example, generic_k8s_user can be referenced in rolebindings to give/take permissions)"
+```
+
 - Check whether the output shows all the `devops[2..22]` users and the `user[2..22]` users.
 - Check whether the output also shows `pks_admin` and `pks_manager`
 
-- If they are not present, the continue as follows:
+- If these users (devopsID, userID) are not present, then continue as follows:
 
 ```
 for i in {2..22}; do uaac user add devops$i --emails devops$i@vmware.com -p password ;done
@@ -153,9 +186,9 @@ for i in {2..22}; do uaac member add pks.clusters.manage devops$i   ; done
 for i in {2..22}; do uaac user add user$i --emails user$i@vmware.com -p password ;done
 ```
 
-## Step 6 - Create K8s Clusters for Everyone
+## Step 6 - Create K8s Clusters for every Workshop Attendee
 
-- We need to `pks create-cluster user[2..22]-cluster.pks4u.com --plan small ...` 
+- We need to `pks create-cluster user[2..22]-cluster.pks4u.com --plan small ...` but there's an easy way to accomplish this:
 
 - To do this, we're going to use some scripts found at: 
 
@@ -165,7 +198,7 @@ cd /work/manage-pks/gcp
 - First, let's check if the clusters `user[2..22]-cluster` already exist:
 
 ```
-pks login -a https://api.pks.pks4u.com:9021 -u pks_admin -p password -k
+pks login -a https://api.pks.pks4u.com:9021 -u pks_admin -p r4tyuKW_q -k
 pks clusters
 ```
 - Expected Output
@@ -199,22 +232,22 @@ vi 02-playing-with-accessing.sh
 - Then check on `gcloud` to see if the DNS Entries and Load Balancers are in place for each `user[2.22]-cluster`:
 
 ```
-gcloud dns record-sets list --zone pks4u-zone --filter=Type=A | grep user.-cluster-k8s.pks4u.com
+gcloud dns record-sets list --zone pks4u-zone --filter=Type=A | grep cluster-k8s.pks4u.com
 ```
 
 - All going well, you should be able to log into each cluster as `pks_admin` and each `userID` should be able to see only their specidic cluster `userID-cluster`:
 
 ```
-pks login -a https://api.pks.pks4u.com:9021 -u pks_admin -p password -k; pks clusters
+pks login -a https://api.pks.pks4u.com:9021 -u pks_admin -p r4tyuKW_q -k; pks clusters
 for i in {2..22}; do pks login -a https://api.pks.pks4u.com:9021 -u devops$i -p password -k; pks cluster user$i-cluster; done
 ```
 
-## Step 7 - Create K8s Shared-Clusters with Roles and Rolebindings
+## Step 7 - Create a K8s Shared-Cluster with Roles and Rolebindings
 
 - The `share-cluster` needs to exist with access allowed for `userID` to `namespaceID` and nothing else. Let's check:
 
 ```
-pks login -a https://api.pks.pks4u.com:9021 -u pks_admin -p password -k
+pks login -a https://api.pks.pks4u.com:9021 -u pks_admin -p r4tyuKW_q -k
 pks cluster shared-cluster
 pks get-credentials shared-cluster
 kubectl get namespaces
@@ -229,7 +262,7 @@ cd /work/manage-pks/gcp
 ./manage-cluster-provision-v2 shared-cluster small pks4u-zone
 ```
 
-- It will run for 10 minutes. You can then continue with:
+- It will run for 10 minutes. After completion, you can then continue with the execution of the following two files:
 
 ```
 cd /work/pks4lbrands
