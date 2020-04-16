@@ -290,8 +290,44 @@ user19:
 user20:
 ```
 
+# Problems
 
+## Problem with SSH
 
+- If you get the following type of message when trying to access one of the Ubuntu VMs on AWS it's because you have conflicting/vestigial information in your `/Users/ralphmeira/.ssh/known_hosts` file.
+
+```
+ssh -i ~/Downloads/fuse.pem ubuntu@user1.pks4u.com
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@       WARNING: POSSIBLE DNS SPOOFING DETECTED!          @
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+The ECDSA host key for user1.pks4u.com has changed,
+and the key for the corresponding IP address 18.206.16.45
+is unknown. This could either mean that
+DNS SPOOFING is happening or the IP address for the host
+and its host key have changed at the same time.
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@    WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!     @
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+IT IS POSSIBLE THAT SOMEONE IS DOING SOMETHING NASTY!
+Someone could be eavesdropping on you right now (man-in-the-middle attack)!
+It is also possible that a host key has just been changed.
+The fingerprint for the ECDSA key sent by the remote host is
+SHA256:SZBhEMWMeuyS+9Yj+7DzbcJXcWzFMGz5biv3kmQMdH8.
+Please contact your system administrator.
+Add correct host key in /Users/ralphmeira/.ssh/known_hosts to get rid of this message.
+Offending ECDSA key in /Users/ralphmeira/.ssh/known_hosts:64
+ECDSA host key for user1.pks4u.com has changed and you have requested strict checking.
+Host key verification failed.
+```
+
+- As you can see in the error message above, the system tells you exactly where the conflicting information can be found. In my example, the issue is on `line 64` of the `/Users/ralphmeira/.ssh/known_hosts` file.
+
+- Corrective action:
+
+```
+sed -i '64d' /Users/ralphmeira/.ssh/known_hosts
+```
 
 
 
