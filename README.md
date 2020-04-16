@@ -271,7 +271,7 @@ cd /work/pks4lbrands
 ```
 - You should see a long list of roles and rolebindings as the output.
 
-# Step 8 - The Bonus Lab
+## Step 8 - The Bonus Lab
 
 - The Workshop Bonus Lab is executed on PAS running on Azure. Don't worry if you don't have PAS running on Azure, it's actually quite easy to spin up PAS on Azure using the [Azure Marketplace](https://portal.azure.com/#blade/Microsoft_Azure_Marketplace). Search for _Pivotal Platform on Microsoft Azure_ and follow the wizard based process. You will end-up with PAS on Azure using a Domain that will look something like this: `13.86.190.177.cf.pcfazure.com`
 
@@ -295,7 +295,7 @@ for i in {1..25}; do cf set-space-role user$i org$i workshop SpaceManager; done
 for i in {1..25}; do cf set-space-role user$i org$i workshop SpaceDeveloper; done
 ```
 
-# Step 9 - Tanzu Mission Control
+## Step 9 - Tanzu Mission Control
 
 - During Lab-9, the users will need to execute something similar to this command on their respective `userID-cluster`:
 ```
