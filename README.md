@@ -4,12 +4,13 @@
 
 # Set-Up Steps for Tanzu-Workshop-TKG-i
 
-The [TKG-i Workshop](https://github.com/rm511130/Tanzu-Workshop-TKG-i#vmware-tkg-i-workshop) needs quite a lot of set-up for it to work. These instructions should help you with all the necessary steps.
+- The [TKG-i Workshop](https://github.com/rm511130/Tanzu-Workshop-TKG-i#vmware-tkg-i-workshop) needs quite a lot of set-up for it to work well. These instructions are in constant evolution, but they will help you with all the key set-up steps. It's recommended that you start by looking through the [Labs](https://github.com/rm511130/Tanzu-Workshop-TKG-i#vmware-tkg-i-workshop) to get better acquainted with what is expected of the workshop attendees.
 
-## Step 0 - Clone the Workshop repo to customize it
+## Step 0 - Customize the TKG-i Workshop
 
-- correct the date/time in the agenda
-- add an easy tinyurl.com link at the top of the page and point it at your github URL.
+- You can `fork` my `https://github.com/rm511130/Tanzu-Workshop-TKG-i` repo to add, change or delete content.
+- Once you have your own forked version of the repo, you can start by correcting the date/time in the agenda so it matches your workshop date/time and duration.
+- It's usually advisable to add an easy to remember [tinyurl.com](https://tiny.url) link at the top of the page and have it point at your forked workshop github URL. For example, I would use [http://tiny.url/VMware01012020](https://tiny.url/VMware01012020) 
 
 ## Step 0.5 - Create VMs using gcloud
 
