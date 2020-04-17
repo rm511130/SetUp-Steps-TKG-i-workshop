@@ -1,5 +1,11 @@
 #### [http://tinyurl.com/VMware01012020](https://tinyurl.com/VMware01012020)
 
+# Useful links
+
+1. [Link to Workshop / Labs](http://tinyurl.com/tkg-i-2020)
+2. [Link to Jim Basler's Lab X](https://github.com/jimbasler-pivotal/springkube)
+3. [Link to Ryan Baxter's Spring K8s Workshop](https://hackmd.io/@ryanjbaxter/spring-on-k8s-workshop)
+
 # Environment for TKG-i Workshop
 
 ![](./BigDiagram.png)
