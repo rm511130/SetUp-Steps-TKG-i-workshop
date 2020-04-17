@@ -6,6 +6,22 @@
 2. [Link to Jim Basler's Lab X](https://github.com/jimbasler-pivotal/springkube)
 3. [Link to Ryan Baxter's Spring K8s Workshop](https://hackmd.io/@ryanjbaxter/spring-on-k8s-workshop)
 
+# Recommendations for Running this Workshop
+
+1. Work with a contact/lead/mgr person at the customer/prospect account ahead of time. Walk him/her through the workshop.
+2. Get attendees to sign-up and run through the pre-requisites. 10 to 15 is ideal. 25 is the limit.
+3. Test everything a full day before the actual workshop
+4. Test the limits of your AWS, GCP, Azure accounts
+5. Avoid counting on workshop attendees' PCs for any dependencies.
+6. Set the Objectives right from the beginning.
+    - Get hands on TKG
+    - Experience Tanzu
+    - Learn about K8s
+    - Understand the TAS value proposition
+    - Some demos throughout the workshop
+7. Keep it fun
+8. Have a colleague monitor the chat box.
+
 # Environment for TKG-i Workshop
 
 ![](./BigDiagram.png)
