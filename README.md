@@ -5,6 +5,7 @@
 1. [Link to TKG-i Workshop / Labs](http://tinyurl.com/tkg-i-2020)
 2. [Link to Jim Basler's Lab X](https://github.com/jimbasler-pivotal/springkube)
 3. [Link to Ryan Baxter's Spring K8s Workshop](https://hackmd.io/@ryanjbaxter/spring-on-k8s-workshop)
+4. [Deeper Dive into TKG - Labs](https://github.com/Pivotal-Field-Engineering/tkg-lab)
 
 # Recommendations for Running this Workshop
 
