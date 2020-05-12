@@ -164,11 +164,11 @@ ssh -i ~/Downloads/fuse.pem ubuntu@user3.pks4u.com
 - For this to occur, the AWS Ubuntu VMs need to be:
   - up and running
   - properly entered in gcloud's DNS where, for example, `nslookup user1.pks4u.com` produces `18.206.16.45` which is the external IP address for the `user1` VM.
-- You can then execute the following commands to make sure each AWS Ubuntu VM has the `~/my_number` file:
+- You can then execute the following commands to make sure each AWS Ubuntu VM has the `~/my_number` file. Execute these commands from your Mac:
 
 ```
-Mac $  for i in {1..20}; do ssh -i ~/Downloads/fuse.pem ubuntu@user$i.pks4u.com "echo \"$i\" > my_number"; done
-Mac $  for i in {1..20}; do ssh -i ~/Downloads/fuse.pem ubuntu@user$i.pks4u.com "cat ~/my_number"; done
+for i in {1..20}; do ssh -i ~/Downloads/fuse.pem ubuntu@user$i.pks4u.com "echo \"$i\" > my_number"; done
+for i in {1..20}; do ssh -i ~/Downloads/fuse.pem ubuntu@user$i.pks4u.com "cat ~/my_number"; done
 ```
 
 - When you `ssh -i ~/Downloads/fuse.pem ubuntu@user1.pks4u.com` into one of the AWS Ubuntu VMs, you should see the following messages:
