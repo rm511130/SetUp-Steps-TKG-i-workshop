@@ -158,6 +158,19 @@ ID   START_TIME                STATUS
 ssh -i ~/Downloads/fuse.pem ubuntu@user3.pks4u.com
 ```
 
+## Step 4 - Making each AWS VM uniquely aligned to its allocated UserID
+
+- The AWS Ubuntu VMs needs to have a `~/my_number` file containing the number of the UserID expected to use it.
+- For this to occur, the AWS Ubuntu VMs need to be:
+  - up and running
+  - properly entered in gcloud's DNS where, for example, `nslookup user1.pks4u.com` produces `18.206.16.45` which is the external IP address for the `user1` VM.
+- You can then execute the following commands to make sure each AWS Ubuntu VM has the `~/my_number` file:
+
+```
+Mac $  for i in {1..20}; do ssh -i ~/Downloads/fuse.pem ubuntu@user$i.pks4u.com "echo \"$i\" > my_number"; done
+Mac $  for i in {1..20}; do ssh -i ~/Downloads/fuse.pem ubuntu@user$i.pks4u.com "cat ~/my_number"; done
+```
+ 
 ## Step 5 - Check whether all the PKS UAA Users are in place
 
 ```
