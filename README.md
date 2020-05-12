@@ -74,7 +74,7 @@ manage-cluster-provision-v2
 
 - My OpsMan URL is: `https://pcf.pks4u.com`           with credentials: `admin / r4tyuKW_q`
 - My PKS API is at: `api.pks.pks4u.com`               with credentials: `pks_admin / r4tyuKW_q`
-- Harbor is at:     `https://harbor.pks.pks4u.com`    with credentials: `admin / r4tyuKW_q`
+- Harbor is at:     `https://harbor.pks4u.com`        with credentials: `admin / r4tyuKW_q`
 
 - To get into my GCP account I use:  
 
@@ -392,6 +392,40 @@ user18:
 user19:
 user20:
 ```
+
+## Step 10 - Creating Individual Admin Users in Harbor (https://harbor.pks4u.com)
+
+- Log into https://harbor.pks4u.com using `admin` / `r4tyuKW_q`
+- On the bottom left of the screen, click on `API Explorer`
+- Click on the 'Authorize' button and authorize `admin` / `r4tyuKW_q`. Close the box.
+- Search for the `Creates a new user account` API line. 
+- Click on `Try it out` then `Execute` and copy the CURL command syntax... it will look something like this:
+
+```
+curl -X POST "https://harbor.pks4u.com/api/users" -H "accept: application/json" -H "authorization: Basic YWRtaW46cGFzc3dvcmQ=" -H "Content-Type: application/json" -H "X-Xsrftoken: LxYUIA6EWgUgqofZ14nE4akRIS1UDa9W" -d "{ \"username\": \"string\", \"comment\": \"string\", \"update_time\": \"string\", \"password\": \"string\", \"user_id\": 0, \"realname\": \"string\", \"deleted\": true, \"creation_time\": \"string\", \"role_id\": 0, \"has_admin_role\": true, \"role_name\": \"string\", \"reset_uuid\": \"string\", \"Salt\": \"string\", \"email\": \"string\"}"
+```
+
+- Using the authorization strings:
+
+```
+-H "authorization: Basic YWRtaW46cGFzc3dvcmQ=" -H "Content-Type: application/json" -H "X-Xsrftoken: LxYUIA6EWgUgqofZ14nE4akRIS1UDa9W"
+```
+- Run the following shell command from your Mac:
+
+```
+for i in {1..30}
+do
+curl -X POST "https://harbor.pks4u.com/api/users" \
+-H "accept: application/json" \
+-H "authorization: Basic YWRtaW46cGFzc3dvcmQ=" \
+-H "Content-Type: application/json" \
+-H "X-Xsrftoken: LxYUIA6EWgUgqofZ14nE4akRIS1UDa9W" \
+-d "{ \"username\": \"user$i\", \"comment\": \"user$i\", \"password\": \"Password1\", \"user_id\": $i, \"realname\": \"user$i\", \"deleted\": false, \"has_admin_role\": true, \"email\": \"user$i@vmware.com\"}"
+done
+```
+
+- And voila, you're done.
+
 
 # Problems
 
