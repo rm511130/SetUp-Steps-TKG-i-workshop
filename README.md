@@ -170,6 +170,25 @@ ssh -i ~/Downloads/fuse.pem ubuntu@user3.pks4u.com
 Mac $  for i in {1..20}; do ssh -i ~/Downloads/fuse.pem ubuntu@user$i.pks4u.com "echo \"$i\" > my_number"; done
 Mac $  for i in {1..20}; do ssh -i ~/Downloads/fuse.pem ubuntu@user$i.pks4u.com "cat ~/my_number"; done
 ```
+
+- When you `ssh -i ~/Downloads/fuse.pem ubuntu@user1.pks4u.com` into one of the AWS Ubuntu VMs, you should see the following messages:
+
+```
+Welcome to Ubuntu 18.04.3 LTS (GNU/Linux 5.3.0-1017-aws x86_64)
+
+[...]
+
+Last login: Tue May 12 14:38:19 2020 from 184.57.164.25
+
+my_number is 1
+openjdk version "11.0.7" 2020-04-14
+OpenJDK Runtime Environment (build 11.0.7+10-post-Ubuntu-2ubuntu218.04)
+OpenJDK 64-Bit Server VM (build 11.0.7+10-post-Ubuntu-2ubuntu218.04, mixed mode, sharing)
+Your UserID is user1
+Your DevopsID is devops1
+Your Namespace in the Shared-Cluster is namespace1
+Your role in the Shared-Cluster is vmware-role1
+```
  
 ## Step 5 - Check whether all the PKS UAA Users are in place
 
