@@ -98,7 +98,7 @@ Mac $ open https://console.cloud.google.com/
 https://console.aws.amazon.com/
 ```
 
-- These VMs are based on a Public AWS AMI: `ami-03d58bcccfea6e008`. They come with multiple CLIs: `pks, cf, helm, gcloud, wget, docker, git, jq, python3, ...`
+- These VMs are based on a Public AWS AMI: `ami-0c56c20f4d1cafab0`. They come with multiple CLIs: `pks, cf, helm, gcloud, wget, docker, git, jq, python3, gfsh, kubectl, dotnet, ...`
 
 - These VMs are accessible via the use of a [`pem`](https://github.com/rm511130/Tanzu-Workshop-PKS/blob/master/fuse.pem) or [`ppk`](https://github.com/rm511130/Tanzu-Workshop-PKS/blob/master/fuse.pem) key. 
 - Workshop attendees are asked, as a set of pre-requisite steps, to make sure they can access the `user1.pks4u.com` VM a few days before the workshop is scheduled to take place.
